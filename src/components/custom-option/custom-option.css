@@ -1,6 +1,6 @@
 li {
   padding: .5rem;
-  border-top: 1px solid ;
+  border-top: 1px solid##F4F4FA;
   background: #F5F5F7;
 
   cursor: pointer;
@@ -8,11 +8,6 @@ li {
   position: relative;
   font-family: Helvetica, sans-serif;
 }
-
-/* :host:focus, :host:hover {
-  display: block;
-  outline: 10px solid red;
-} */
 
 li:hover {
   background: #E5E5EA;
