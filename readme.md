@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-running demo:
+running the demo:
 
 ```bash
 npm install
@@ -33,10 +33,6 @@ You can read more about these different approaches in the [Stencil docs](https:/
 
 ### Lazy Loading
 
-If your Stencil project is built with the [`dist`](https://stenciljs.com/docs/distribution) output target, you can import a small bootstrap script that registers all components and allows you to load individual component scripts lazily.
-
-For example, given your Stencil project namespace is called `my-design-system`, to use `my-component` on any website, inject this into your HTML:
-
 ```html
   <custom-dropdown label="Color Options">
     <custom-option value="white">White</custom-option>
@@ -52,27 +48,15 @@ For example, given your Stencil project namespace is called `my-design-system`, 
   </script>
 ```
 
-This will only load the necessary scripts needed to render `<custom-dropdown />`. Once more components of this package are used, they will automatically be loaded lazily.
-
-You can also import the script as part of your `node_modules` in your applications entry file:
-
-```tsx
-import 'foobar-design-system/dist/foobar-design-system/foobar-design-system.esm.js';
-```
-
-Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-y6v26a?file=src%2Fmain.tsx).
-
 ### Standalone
 
 If you are using a Stencil component library with `dist-custom-elements`, we recommend importing Stencil components individually in those files where they are needed.
 
 To export Stencil components as standalone components make sure you have the [`dist-custom-elements`](https://stenciljs.com/docs/custom-elements) output target defined in your `stencil.config.ts`.
 
-For example, given you'd like to use `<my-component />` as part of a React component, you can import the component directly via:
+For example, given you'd like to use `<custom-option />` as part of a React component, you can import the component directly via:
 
 ```tsx
-import 'foobar-design-system/my-component';
-
 function App() {
   return (
     <>
@@ -95,5 +79,3 @@ function App() {
 
 export default App;
 ```
-
-Check out this [Live Demo](https://stackblitz.com/edit/vitejs-vite-b6zuds?file=src%2FApp.tsx).
