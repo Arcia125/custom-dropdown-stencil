@@ -5,64 +5,76 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { Option } from "./utils/models";
+export { Option } from "./utils/models";
 export namespace Components {
     interface CustomDropdown {
         "label": string;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+    interface CustomOption {
+        "value": string;
     }
 }
+export interface CustomDropdownCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomDropdownElement;
+}
+export interface CustomOptionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomOptionElement;
+}
 declare global {
+    interface HTMLCustomDropdownElementEventMap {
+        "changeFilter": string;
+    }
     interface HTMLCustomDropdownElement extends Components.CustomDropdown, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCustomDropdownElementEventMap>(type: K, listener: (this: HTMLCustomDropdownElement, ev: CustomDropdownCustomEvent<HTMLCustomDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCustomDropdownElementEventMap>(type: K, listener: (this: HTMLCustomDropdownElement, ev: CustomDropdownCustomEvent<HTMLCustomDropdownElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLCustomDropdownElement: {
         prototype: HTMLCustomDropdownElement;
         new (): HTMLCustomDropdownElement;
     };
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLCustomOptionElementEventMap {
+        "selectOption": Option;
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    interface HTMLCustomOptionElement extends Components.CustomOption, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCustomOptionElementEventMap>(type: K, listener: (this: HTMLCustomOptionElement, ev: CustomOptionCustomEvent<HTMLCustomOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCustomOptionElementEventMap>(type: K, listener: (this: HTMLCustomOptionElement, ev: CustomOptionCustomEvent<HTMLCustomOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCustomOptionElement: {
+        prototype: HTMLCustomOptionElement;
+        new (): HTMLCustomOptionElement;
     };
     interface HTMLElementTagNameMap {
         "custom-dropdown": HTMLCustomDropdownElement;
-        "my-component": HTMLMyComponentElement;
+        "custom-option": HTMLCustomOptionElement;
     }
 }
 declare namespace LocalJSX {
     interface CustomDropdown {
         "label"?: string;
+        "onChangeFilter"?: (event: CustomDropdownCustomEvent<string>) => void;
     }
-    interface MyComponent {
-        /**
-          * The first name
-         */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+    interface CustomOption {
+        "onSelectOption"?: (event: CustomOptionCustomEvent<Option>) => void;
+        "value"?: string;
     }
     interface IntrinsicElements {
         "custom-dropdown": CustomDropdown;
-        "my-component": MyComponent;
+        "custom-option": CustomOption;
     }
 }
 export { LocalJSX as JSX };
@@ -70,7 +82,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "custom-dropdown": LocalJSX.CustomDropdown & JSXBase.HTMLAttributes<HTMLCustomDropdownElement>;
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "custom-option": LocalJSX.CustomOption & JSXBase.HTMLAttributes<HTMLCustomOptionElement>;
         }
     }
 }

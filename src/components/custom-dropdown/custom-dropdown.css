@@ -55,20 +55,3 @@ label {
 }
 
 
-/* CSS FOR CUSTOM-OPTIONS */
-li {
-  padding: .5rem;
-  border-top: 1px solid #eee;
-
-  cursor: pointer;
-  transition: all 150ms ease-in;
-  position: relative;
-}
-
-li:hover, li.current {
-  background: #eaeaea;
-}
-
-li.active {
-  opacity: 1;
-}
