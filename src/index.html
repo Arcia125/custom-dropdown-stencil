@@ -25,7 +25,7 @@
     </style>
   </head>
   <body>
-    <custom-dropdown label="Example">
+    <custom-dropdown label="Color Options">
       <custom-option value="white">White</custom-option>
       <custom-option value="white-titanium">White Titanium</custom-option>
       <custom-option value="black">Black</custom-option>
@@ -33,5 +33,9 @@
       <custom-option value="teal">Teal</custom-option>
       <custom-option value="pink">Pink</custom-option>
     </custom-dropdown>
+    <script>
+      const customDropdown = document.querySelector('custom-dropdown');
+      customDropdown.addEventListener('changeDropdown', console.log);
+    </script>
   </body>
 </html>
