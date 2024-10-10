@@ -1,12 +1,23 @@
 li {
   padding: .5rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid ;
+  background: #F5F5F7;
 
   cursor: pointer;
   transition: all 150ms ease-in;
   position: relative;
+  font-family: Helvetica, sans-serif;
 }
 
-li:hover, li.current {
-  background: #eaeaea;
+/* :host:focus, :host:hover {
+  display: block;
+  outline: 10px solid red;
+} */
+
+li:hover {
+  background: #E5E5EA;
+}
+
+li:focus {
+  background: #D1D1D6;
 }

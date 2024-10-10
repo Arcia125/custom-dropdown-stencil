@@ -1,5 +1,5 @@
 :host {
-  display: block;
+  font-family: Helvetica, sans-serif;
 }
 
 form {
@@ -28,14 +28,11 @@ label {
   transform: translateY(-50%);
 }
 
-
-
 .options {
   position: absolute;
   left: 0;
   right: 0;
   top: 3rem;
-  max-height: 10rem;
   overflow-y: auto;
   list-style-type: none;
   transform: scale(1, 0);

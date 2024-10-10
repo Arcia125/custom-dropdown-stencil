@@ -4,7 +4,7 @@ import { Option } from '../../utils/models';
 @Component({
   tag: 'custom-option',
   styleUrl: 'custom-option.css',
-  shadow: true,
+  shadow: true
 })
 export class CustomOption {
   @Element() el: HTMLElement;
@@ -19,7 +19,7 @@ export class CustomOption {
   }
 
   private onSelect = () => {
-    this.selectOption.emit({ value: this.value });
+    this.selectOption.emit({ value: this.value, label: this.el.innerHTML });
   };
 
   @Listen('click')
@@ -36,7 +36,7 @@ export class CustomOption {
   render() {
     return this.isVisible() && (
       <Host>
-        <li role="option">
+        <li role="option" tabIndex={0}>
           <slot></slot>
         </li>
       </Host>

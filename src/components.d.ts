@@ -9,6 +9,9 @@ import { Option } from "./utils/models";
 export { Option } from "./utils/models";
 export namespace Components {
     interface CustomDropdown {
+        /**
+          * Label above the dropdown
+         */
         "label": string;
     }
     interface CustomOption {
@@ -26,6 +29,7 @@ export interface CustomOptionCustomEvent<T> extends CustomEvent<T> {
 declare global {
     interface HTMLCustomDropdownElementEventMap {
         "changeFilter": string;
+        "changeDropdown": string;
     }
     interface HTMLCustomDropdownElement extends Components.CustomDropdown, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCustomDropdownElementEventMap>(type: K, listener: (this: HTMLCustomDropdownElement, ev: CustomDropdownCustomEvent<HTMLCustomDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -65,7 +69,17 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomDropdown {
+        /**
+          * Label above the dropdown
+         */
         "label"?: string;
+        /**
+          * Fires whenever the value of the dropdown changes
+         */
+        "onChangeDropdown"?: (event: CustomDropdownCustomEvent<string>) => void;
+        /**
+          * Fires whenever the value of the input changes (debounced)
+         */
         "onChangeFilter"?: (event: CustomDropdownCustomEvent<string>) => void;
     }
     interface CustomOption {
