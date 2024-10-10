@@ -37,12 +37,12 @@ describe('custom-option', () => {
     page.rootInstance.handleChangeFilter(new CustomEvent('changeFilter', { detail: 'Option 1' }));
     await page.waitForChanges();
 
-    expect(page.rootInstance.isVisible()).toBe(true);  // Option is visible
+    expect(page.rootInstance.isVisible()).toBe(true);
 
     // Simulate a filter event where the option should be hidden
     page.rootInstance.handleChangeFilter(new CustomEvent('changeFilter', { detail: 'Not an option' }));
     await page.waitForChanges();
 
-    expect(page.rootInstance.isVisible()).toBe(false);  // Option is hidden based on the filter
+    expect(page.rootInstance.isVisible()).toBe(false);
   });
 });
