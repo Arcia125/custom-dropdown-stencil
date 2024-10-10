@@ -13,7 +13,7 @@ describe('custom-dropdown', () => {
     const page = await newE2EPage();
 
     await page.setContent('<custom-dropdown></custom-dropdown>');
-    const component = await page.find('custom-dropdown');
+    // const component = await page.find('custom-dropdown');
     const element = await page.find('custom-dropdown >>> div');
     expect(element.textContent).toEqual(`Hello, World!`);
 

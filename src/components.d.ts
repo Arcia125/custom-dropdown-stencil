@@ -7,6 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface CustomDropdown {
+        "label": string;
     }
     interface MyComponent {
         /**
@@ -43,6 +44,7 @@ declare global {
 }
 declare namespace LocalJSX {
     interface CustomDropdown {
+        "label"?: string;
     }
     interface MyComponent {
         /**

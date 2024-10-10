@@ -23,4 +23,8 @@ export const config: Config = {
   testing: {
     browserHeadless: "new",
   },
+  extras: {
+    experimentalSlotFixes: true,
+    experimentalScopedSlotChanges: true
+  },
 };

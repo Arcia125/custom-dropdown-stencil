@@ -7,8 +7,16 @@
 
     <script type="module" src="/build/custom-dropdown.esm.js"></script>
     <script nomodule src="/build/custom-dropdown.js"></script>
+    <style>
+      :not(:defined) {
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body>
-    <custom-dropdown></custom-dropdown>
+    <custom-dropdown label="Example">
+      <li role="option">One</li>
+      <li role="option">Two</li>
+    </custom-dropdown>
   </body>
 </html>
