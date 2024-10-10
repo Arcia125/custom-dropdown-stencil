@@ -11,6 +11,17 @@
       :not(:defined) {
         visibility: hidden;
       }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --custom-dropdown-background-color: #2C2C2E;
+          --custom-option-background-color-hover: #3A3A3C;
+          --custom-option-background-color-focus: #48484A;
+          --custom-dropdown-font-color: #F5F5F7;
+        }
+        body {
+          background-color: #1C1C1E;
+        }
+      }
     </style>
   </head>
   <body>

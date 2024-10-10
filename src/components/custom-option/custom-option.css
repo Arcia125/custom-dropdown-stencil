@@ -1,18 +1,22 @@
+:host {
+}
+
 li {
-  padding: .5rem;
-  border-top: 1px solid##F4F4FA;
-  background: #F5F5F7;
+  padding: .5rem 1rem;
+  background-color: var(--custom-dropdown-background-color, #F5F5F7);
 
   cursor: pointer;
   transition: all 150ms ease-in;
   position: relative;
   font-family: Helvetica, sans-serif;
+
+  color: var(--custom-dropdown-font-color, #767676);
 }
 
 li:hover {
-  background: #E5E5EA;
+  background-color: var(--custom-option-background-color-hover, #E5E5EA);
 }
 
 li:focus {
-  background: #D1D1D6;
+  background-color: var(--custom-option-background-color-focus, #D1D1D6);
 }
