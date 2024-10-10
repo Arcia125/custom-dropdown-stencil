@@ -8,13 +8,24 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Option } from "./utils/models";
 export { Option } from "./utils/models";
 export namespace Components {
+    /**
+     * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
+     * to the native browser select element
+     */
     interface CustomDropdown {
         /**
           * Label above the dropdown
          */
         "label": string;
     }
+    /**
+     * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
+     * built in option element. Only to be used inside of custom-dropdown
+     */
     interface CustomOption {
+        /**
+          * The value that will emitted when the custom-dropdown changes
+         */
         "value": string;
     }
 }
@@ -31,6 +42,10 @@ declare global {
         "changeFilter": string;
         "changeDropdown": string;
     }
+    /**
+     * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
+     * to the native browser select element
+     */
     interface HTMLCustomDropdownElement extends Components.CustomDropdown, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCustomDropdownElementEventMap>(type: K, listener: (this: HTMLCustomDropdownElement, ev: CustomDropdownCustomEvent<HTMLCustomDropdownElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -48,6 +63,10 @@ declare global {
     interface HTMLCustomOptionElementEventMap {
         "selectOption": Option;
     }
+    /**
+     * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
+     * built in option element. Only to be used inside of custom-dropdown
+     */
     interface HTMLCustomOptionElement extends Components.CustomOption, HTMLStencilElement {
         addEventListener<K extends keyof HTMLCustomOptionElementEventMap>(type: K, listener: (this: HTMLCustomOptionElement, ev: CustomOptionCustomEvent<HTMLCustomOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
         addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
@@ -68,6 +87,10 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    /**
+     * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
+     * to the native browser select element
+     */
     interface CustomDropdown {
         /**
           * Label above the dropdown
@@ -82,8 +105,18 @@ declare namespace LocalJSX {
          */
         "onChangeFilter"?: (event: CustomDropdownCustomEvent<string>) => void;
     }
+    /**
+     * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
+     * built in option element. Only to be used inside of custom-dropdown
+     */
     interface CustomOption {
+        /**
+          * Fired when clicking on an option
+         */
         "onSelectOption"?: (event: CustomOptionCustomEvent<Option>) => void;
+        /**
+          * The value that will emitted when the custom-dropdown changes
+         */
         "value"?: string;
     }
     interface IntrinsicElements {
@@ -95,7 +128,15 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            /**
+             * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
+             * to the native browser select element
+             */
             "custom-dropdown": LocalJSX.CustomDropdown & JSXBase.HTMLAttributes<HTMLCustomDropdownElement>;
+            /**
+             * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
+             * built in option element. Only to be used inside of custom-dropdown
+             */
             "custom-option": LocalJSX.CustomOption & JSXBase.HTMLAttributes<HTMLCustomOptionElement>;
         }
     }

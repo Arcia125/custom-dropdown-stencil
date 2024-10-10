@@ -3,6 +3,10 @@ import clsx from 'clsx';
 import { debounce } from '../../utils/debounce';
 import { Option } from '../../utils/models';
 
+/**
+ * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
+ * to the native browser select element
+ */
 @Component({
   tag: 'custom-dropdown',
   styleUrl: 'custom-dropdown.css',
