@@ -149,22 +149,24 @@ export class CustomDropdown implements ComponentInterface {
 
   @Listen('keydown')
   handleKeyDown (event: KeyboardEvent) {
-    if (['Enter', ' '].includes(event.key)) {
-      event.preventDefault();
-      if (this.active) {
-        this.updateOption();
-      }
-      this.toggleDropdown();
-      if (this.selectedOption) {
-        this.focusSelectedOption();
-      }
-    }
-    if (this.active && event.key === 'Escape') {
-      this.changeActiveState(false);
-      this.updateFilter(this.selectedOption ? this.selectedOption.label : this.filter);
-    }
-
     switch (event.key) {
+      case 'Enter':
+      case ' ':
+        event.preventDefault();
+        if (this.active) {
+          this.updateOption();
+        }
+        this.toggleDropdown();
+        if (this.selectedOption) {
+          this.focusSelectedOption();
+        }
+        break;
+      case 'Escape':
+        if (this.active) {
+          this.changeActiveState(false);
+          this.updateFilter(this.selectedOption ? this.selectedOption.label : this.filter);
+        }
+        break;
       case 'ArrowDown':
         event.preventDefault();
         this.focusNextOption();
