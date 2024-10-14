@@ -68,11 +68,7 @@ export class CustomDropdown implements ComponentInterface {
   private updateOption = () => {
     const options = this.getVisibleOptions();
     const optEl = options.find((o) => document.activeElement === o);
-    if (optEl) {
-      this.selectedOption = { value: optEl.value, label: optEl.innerHTML };
-    } else {
-      this.selectedOption = this.selectedOption;
-    }
+    this.selectedOption = optEl ? { value: optEl.value, label: optEl.innerHTML } : this.selectedOption;
     this.changeDropdown.emit(this.selectedOption ? this.selectedOption.value : '');
   };
 
@@ -87,9 +83,8 @@ export class CustomDropdown implements ComponentInterface {
     return Array.from(this.el.querySelectorAll('custom-option'));
   };
 
-  setOptionFocus = (option: Option) => {
-    const options = this.getVisibleOptions();
-    const optEl = options.find((o) => o.value === option.value);
+  setOptionFocus = (option: Option | HTMLCustomOptionElement) => {
+    const optEl = 'label' in option ? this.getVisibleOptions().find((o) => o.value === option.value) : option;
     const li = optEl?.shadowRoot.querySelector('li')
     li?.focus();
   };
@@ -108,13 +103,8 @@ export class CustomDropdown implements ComponentInterface {
     }
     const options = this.getVisibleOptions();
     const index = options.findIndex((o) => document.activeElement === o);
-    if (index === options.length - 1) {
-      const option = options[0];
-      this.setOptionFocus({ value: option.value, label: option.innerHTML });
-    } else {
-      const option = options[index + 1];
-      this.setOptionFocus({ value: option.value, label: option.innerHTML });
-    }
+    const option = index === options.length - 1 ? options[0] : options[index + 1];
+    this.setOptionFocus(option);
   }
 
   focusPrevOption = () => {
@@ -123,13 +113,8 @@ export class CustomDropdown implements ComponentInterface {
     }
     const options = this.getVisibleOptions();
     const index = options.findIndex((o) => document.activeElement === o);
-    if (index === 0 || index === -1) {
-      const option = options[options.length - 1];
-      this.setOptionFocus({ value: option.value, label: option.innerHTML });
-    } else {
-      const option = options[index - 1];
-      this.setOptionFocus({ value: option.value, label: option.innerHTML });
-    }
+    const option = index === 0 || index === -1 ? options[options.length - 1] : options[index - 1];
+    this.setOptionFocus(option);
   }
 
   private changeActiveState = (active: boolean) => {
