@@ -1,5 +1,6 @@
 {
   "name": "@arcia125/custom-dropdown",
+  "private": false,
   "version": "0.0.1",
   "description": "Custom dropdown Web Component",
   "main": "dist/index.cjs.js",
