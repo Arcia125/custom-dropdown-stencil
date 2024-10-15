@@ -39,7 +39,6 @@ export interface CustomOptionCustomEvent<T> extends CustomEvent<T> {
 }
 declare global {
     interface HTMLCustomDropdownElementEventMap {
-        "changeFilter": string;
         "changeDropdown": string;
     }
     /**
@@ -100,10 +99,6 @@ declare namespace LocalJSX {
           * Fires whenever the value of the dropdown changes
          */
         "onChangeDropdown"?: (event: CustomDropdownCustomEvent<string>) => void;
-        /**
-          * Fires whenever the value of the input changes (debounced)
-         */
-        "onChangeFilter"?: (event: CustomDropdownCustomEvent<string>) => void;
     }
     /**
      * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's

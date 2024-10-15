@@ -10,13 +10,15 @@ import { Option } from '../../utils/models';
 @Component({
   tag: 'custom-dropdown',
   styleUrl: 'custom-dropdown.css',
-  shadow: true
+  shadow: true,
 })
 export class CustomDropdown implements ComponentInterface {
   /**
    * Label above the dropdown
    */
   @Prop() label: string;
+
+  itemContainerRef!: HTMLUListElement;
 
   /**
    * Whether or not the dropdown is open
@@ -36,19 +38,18 @@ export class CustomDropdown implements ComponentInterface {
   @Element() el: HTMLElement;
 
   /**
-   * Fires whenever the value of the input changes (debounced)
-   */
-  @Event() changeFilter: EventEmitter<string>;
-
-  /**
    * Fires whenever the value of the dropdown changes
    */
   @Event() changeDropdown: EventEmitter<string>;
 
   /**
-   * Time in milliseconds to debounce the changeFilter event
+   * Time in milliseconds to debounce the handleChangeFilterDebounced
    */
   private filterDebounceMs = 200;
+
+  componentDidLoad() {
+    this.updateOptionVisibility(this.filter);
+  }
 
   @Listen('focus')
   handleFocus() {
@@ -67,7 +68,7 @@ export class CustomDropdown implements ComponentInterface {
 
   private updateOption = () => {
     const options = this.getVisibleOptions();
-    const optEl = options.find((o) => document.activeElement === o);
+    const optEl = options.find(o => document.activeElement === o);
     this.selectedOption = optEl ? { value: optEl.value, label: optEl.innerHTML } : this.selectedOption;
     this.changeDropdown.emit(this.selectedOption ? this.selectedOption.value : '');
   };
@@ -79,13 +80,17 @@ export class CustomDropdown implements ComponentInterface {
     this.toggleDropdown();
   }
 
-  getVisibleOptions = () => {
+  getAllOptions = () => {
     return Array.from(this.el.querySelectorAll('custom-option'));
   };
 
+  getVisibleOptions = () => {
+    return this.getAllOptions();
+  };
+
   setOptionFocus = (option: Option | HTMLCustomOptionElement) => {
-    const optEl = 'label' in option ? this.getVisibleOptions().find((o) => o.value === option.value) : option;
-    const li = optEl?.shadowRoot.querySelector('li')
+    const optEl = 'label' in option ? this.getVisibleOptions().find(o => o.value === option.value) : option;
+    const li = optEl?.shadowRoot.querySelector('li');
     li?.focus();
   };
 
@@ -102,26 +107,26 @@ export class CustomDropdown implements ComponentInterface {
       this.changeActiveState(true);
     }
     const options = this.getVisibleOptions();
-    const index = options.findIndex((o) => document.activeElement === o);
+    const index = options.findIndex(o => document.activeElement === o);
     const option = index === options.length - 1 ? options[0] : options[index + 1];
     this.setOptionFocus(option);
-  }
+  };
 
   focusPrevOption = () => {
     if (!this.active) {
       this.changeActiveState(true);
     }
     const options = this.getVisibleOptions();
-    const index = options.findIndex((o) => document.activeElement === o);
+    const index = options.findIndex(o => document.activeElement === o);
     const option = index === 0 || index === -1 ? options[options.length - 1] : options[index - 1];
     this.setOptionFocus(option);
-  }
+  };
 
   private changeActiveState = (active: boolean) => {
     if (!this.active) {
       this.el.shadowRoot.querySelector('input').focus();
     }
-    if (!active){
+    if (!active) {
       this.el.focus();
     }
     this.active = active;
@@ -133,7 +138,7 @@ export class CustomDropdown implements ComponentInterface {
   };
 
   @Listen('keydown')
-  handleKeyDown (event: KeyboardEvent) {
+  handleKeyDown(event: KeyboardEvent) {
     switch (event.key) {
       case 'Enter':
       case ' ':
@@ -161,22 +166,33 @@ export class CustomDropdown implements ComponentInterface {
         this.focusPrevOption();
         break;
     }
-  };
+  }
 
   updateFilter = (value: string) => {
     this.filter = value;
-    this.debouncedChangeFilter(this.filter);
-  }
+    this.handleChangeFilterDebounced(this.filter);
+  };
 
-  debouncedChangeFilter = debounce((filter: string) => {
-    this.changeFilter.emit(filter);
+  updateOptionVisibility = (filter: string) => {
+    const options = this.getAllOptions();
+    options.forEach(option => {
+      if (filter === '' || option.innerHTML.toLowerCase().includes(filter)) {
+        option.classList.add('visible');
+      } else {
+        option.classList.remove('visible');
+      }
+    });
+  };
+
+  handleChangeFilterDebounced = debounce((filter: string) => {
+    this.updateOptionVisibility(filter);
   }, this.filterDebounceMs);
 
   handleInput = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
     this.updateFilter(value);
-  }
+  };
 
   render() {
     return (

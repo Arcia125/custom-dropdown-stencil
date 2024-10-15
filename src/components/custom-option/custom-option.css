@@ -1,4 +1,10 @@
 :host {
+  display: none;
+}
+
+:host(.visible) {
+  /* outline: 1px solid red; */
+  display: block;
 }
 
 li {

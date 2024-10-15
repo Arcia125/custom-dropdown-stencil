@@ -26,23 +26,4 @@ describe('custom-option', () => {
 
     expect(selectOptionSpy).toHaveBeenCalledWith(expect.objectContaining({ detail: { value: '1', label: 'Option 1' } }));
   });
-
-  it('updates visibility based on filter', async () => {
-    const page = await newSpecPage({
-      components: [CustomOption],
-      html: `<custom-option value="1">Option 1</custom-option>`,
-    });
-
-    // Simulate a filter event where the option is visible
-    page.rootInstance.handleChangeFilter(new CustomEvent('changeFilter', { detail: 'Option 1' }));
-    await page.waitForChanges();
-
-    expect(page.rootInstance.isVisible()).toBe(true);
-
-    // Simulate a filter event where the option should be hidden
-    page.rootInstance.handleChangeFilter(new CustomEvent('changeFilter', { detail: 'Not an option' }));
-    await page.waitForChanges();
-
-    expect(page.rootInstance.isVisible()).toBe(false);
-  });
 });
