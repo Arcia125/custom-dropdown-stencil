@@ -80,13 +80,9 @@ export class CustomDropdown implements ComponentInterface {
     this.toggleDropdown();
   }
 
-  getAllOptions = () => {
-    return Array.from(this.el.querySelectorAll('custom-option'));
-  };
+  getAllOptions = () => Array.from(this.el.querySelectorAll('custom-option'));
 
-  getVisibleOptions = () => {
-    return this.getAllOptions();
-  };
+  getVisibleOptions = () => Array.from(this.el.querySelectorAll('custom-option.visible') as NodeListOf<HTMLCustomOptionElement>);
 
   setOptionFocus = (option: Option | HTMLCustomOptionElement) => {
     const optEl = 'label' in option ? this.getVisibleOptions().find(o => o.value === option.value) : option;
@@ -173,10 +169,13 @@ export class CustomDropdown implements ComponentInterface {
     this.handleChangeFilterDebounced(this.filter);
   };
 
+  optionIsVisible = (filter: string, option: HTMLCustomOptionElement) =>
+    filter === '' || option.innerHTML.toLowerCase().includes(filter);
+
   updateOptionVisibility = (filter: string) => {
     const options = this.getAllOptions();
     options.forEach(option => {
-      if (filter === '' || option.innerHTML.toLowerCase().includes(filter)) {
+      if (this.optionIsVisible(filter, option)) {
         option.classList.add('visible');
       } else {
         option.classList.remove('visible');

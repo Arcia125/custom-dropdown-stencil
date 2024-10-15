@@ -22,7 +22,6 @@ export class CustomOption {
    */
   @Prop() value: string;
 
-
   private onSelect = () => {
     this.selectOption.emit({ value: this.value, label: this.el.innerHTML });
   };
