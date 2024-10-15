@@ -1,7 +1,7 @@
 {
-  "name": "custom-dropdown",
+  "name": "@arcia125/custom-dropdown",
   "version": "0.0.1",
-  "description": "Stencil Component Starter",
+  "description": "Custom dropdown Web Component",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "types": "dist/types/index.d.ts",
