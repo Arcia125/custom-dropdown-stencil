@@ -56,6 +56,16 @@ export class CustomDropdown implements ComponentInterface {
     this.toggleDropdown();
   }
 
+  @Listen('click')
+  handleClick(event: MouseEvent) {
+    if (event.target instanceof customElements.get('custom-option')) {
+      const option = event.target as HTMLCustomOptionElement;
+      this.selectedOption = { value: option.value, label: option.innerHTML };
+      this.updateOption();
+      this.toggleDropdown();
+    }
+  }
+
   @Listen('click', { target: 'document' })
   handleDocumentClick(event: MouseEvent) {
     if (!this.active) {
@@ -72,13 +82,6 @@ export class CustomDropdown implements ComponentInterface {
     this.selectedOption = optEl ? { value: optEl.value, label: optEl.innerHTML } : this.selectedOption;
     this.changeDropdown.emit(this.selectedOption ? this.selectedOption.value : '');
   };
-
-  @Listen('selectOption')
-  handleSelectOption(event: CustomEvent<Option>) {
-    this.selectedOption = event.detail;
-    this.updateOption();
-    this.toggleDropdown();
-  }
 
   getAllOptions = () => Array.from(this.el.querySelectorAll('custom-option'));
 

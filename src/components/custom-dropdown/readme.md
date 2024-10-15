@@ -19,10 +19,9 @@ to the native browser select element
 
 ## Events
 
-| Event            | Description                                               | Type                  |
-| ---------------- | --------------------------------------------------------- | --------------------- |
-| `changeDropdown` | Fires whenever the value of the dropdown changes          | `CustomEvent<string>` |
-| `changeFilter`   | Fires whenever the value of the input changes (debounced) | `CustomEvent<string>` |
+| Event            | Description                                      | Type                  |
+| ---------------- | ------------------------------------------------ | --------------------- |
+| `changeDropdown` | Fires whenever the value of the dropdown changes | `CustomEvent<string>` |
 
 
 ----------------------------------------------

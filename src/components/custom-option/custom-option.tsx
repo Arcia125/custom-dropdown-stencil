@@ -1,4 +1,4 @@
-import { Component, Host, h, Event, EventEmitter, Prop, Listen, Element } from '@stencil/core';
+import { Component, Host, h, Event, EventEmitter, Prop, Element } from '@stencil/core';
 import { Option } from '../../utils/models';
 
 /**
@@ -21,15 +21,6 @@ export class CustomOption {
    * The value that will emitted when the custom-dropdown changes
    */
   @Prop() value: string;
-
-  private onSelect = () => {
-    this.selectOption.emit({ value: this.value, label: this.el.innerHTML });
-  };
-
-  @Listen('click')
-    handleClick() {
-    this.onSelect();
-  }
 
   render() {
     return (
