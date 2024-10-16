@@ -50,9 +50,6 @@
     "puppeteer": "^21.9.0"
   },
   "license": "MIT",
-  "dependencies": {
-    "clsx": "^2.1.1"
-  },
   "author": {
     "name": "Kevin Hallett",
     "email": "kevinmhallett@gmail.com",

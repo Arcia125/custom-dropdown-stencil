@@ -1,5 +1,4 @@
 import { Component, h, ComponentInterface, Host, Prop, State, Listen, Element, Event, EventEmitter } from '@stencil/core';
-import clsx from 'clsx';
 import { debounce } from '../../utils/debounce';
 import { Option } from '../../utils/models';
 
@@ -216,7 +215,7 @@ export class CustomDropdown implements ComponentInterface {
               value={this.selectedOption?.label || this.filter}
             />
           </div>
-          <ul class={clsx('options', { active: this.active })} role="listbox" id={`listbox-${this.label}`}>
+          <ul class={`options${this.active ? ' active' : ''}`} role="listbox" id={`listbox-${this.label}`}>
             <slot></slot>
           </ul>
         </form>
