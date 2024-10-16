@@ -1,4 +1,4 @@
-<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Stencil Component Starter</title> <script type="module" src="./build/custom-dropdown.esm.js"></script> <script nomodule="" src="./build/custom-dropdown.js"></script> <style>:not(:defined) {
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Custom Dropdown</title> <script type="module" src="./build/custom-dropdown.esm.js"></script> <script nomodule="" src="./build/custom-dropdown.js"></script> <style>:not(:defined) {
         visibility: hidden;
       }
       @media (prefers-color-scheme: dark) {
@@ -10,6 +10,9 @@
         }
         body {
           background-color: #1C1C1E;
+          display: flex;
+          justify-content: center;
+          margin-top: 4rem;
         }
       }</style> </head> <body> <custom-dropdown label="Color Options"> <custom-option value="white">White</custom-option> <custom-option value="white-titanium">White Titanium</custom-option> <custom-option value="black">Black</custom-option> <custom-option value="black-titanium">Black Titanium</custom-option> <custom-option value="teal">Teal</custom-option> <custom-option value="pink">Pink</custom-option> </custom-dropdown> <script>
       const customDropdown = document.querySelector('custom-dropdown');
