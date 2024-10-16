@@ -17,8 +17,9 @@ export const config: Config = {
     },
     {
       type: 'www',
-      serviceWorker: null, // disable service workers
-    },
+      serviceWorker: null,
+      baseUrl: 'https://arcia125.github.io/custom-dropdown/',
+    }
   ],
   testing: {
     browserHeadless: "new",
