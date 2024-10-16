@@ -17,8 +17,8 @@ export const config: Config = {
     },
     {
       type: 'www',
-      serviceWorker: null,
-      baseUrl: 'https://arcia125.github.io/custom-dropdown-stencil/',
+      serviceWorker: null
+      // baseUrl: 'https://arcia125.github.io/custom-dropdown-stencil/',
     }
   ],
   testing: {
