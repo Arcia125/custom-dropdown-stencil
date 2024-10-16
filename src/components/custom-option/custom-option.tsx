@@ -1,5 +1,4 @@
-import { Component, Host, h, Event, EventEmitter, Prop, Element } from '@stencil/core';
-import { Option } from '../../utils/models';
+import { Component, Host, h, Prop, Element } from '@stencil/core';
 
 /**
  * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
@@ -12,10 +11,6 @@ import { Option } from '../../utils/models';
 })
 export class CustomOption {
   @Element() el: HTMLElement;
-  /**
-   * Fired when clicking on an option
-   */
-  @Event() selectOption: EventEmitter<Option>;
 
   /**
    * The value that will emitted when the custom-dropdown changes

@@ -5,8 +5,6 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Option } from "./utils/models";
-export { Option } from "./utils/models";
 export namespace Components {
     /**
      * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
@@ -33,10 +31,6 @@ export interface CustomDropdownCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLCustomDropdownElement;
 }
-export interface CustomOptionCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLCustomOptionElement;
-}
 declare global {
     interface HTMLCustomDropdownElementEventMap {
         "changeDropdown": string;
@@ -59,22 +53,11 @@ declare global {
         prototype: HTMLCustomDropdownElement;
         new (): HTMLCustomDropdownElement;
     };
-    interface HTMLCustomOptionElementEventMap {
-        "selectOption": Option;
-    }
     /**
      * Custom option element for use with the custom-dropdown element. Acts similarly to the browser's
      * built in option element. Only to be used inside of custom-dropdown
      */
     interface HTMLCustomOptionElement extends Components.CustomOption, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLCustomOptionElementEventMap>(type: K, listener: (this: HTMLCustomOptionElement, ev: CustomOptionCustomEvent<HTMLCustomOptionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLCustomOptionElementEventMap>(type: K, listener: (this: HTMLCustomOptionElement, ev: CustomOptionCustomEvent<HTMLCustomOptionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLCustomOptionElement: {
         prototype: HTMLCustomOptionElement;
@@ -105,10 +88,6 @@ declare namespace LocalJSX {
      * built in option element. Only to be used inside of custom-dropdown
      */
     interface CustomOption {
-        /**
-          * Fired when clicking on an option
-         */
-        "onSelectOption"?: (event: CustomOptionCustomEvent<Option>) => void;
         /**
           * The value that will emitted when the custom-dropdown changes
          */

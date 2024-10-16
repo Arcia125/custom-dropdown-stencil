@@ -17,13 +17,6 @@ built in option element. Only to be used inside of custom-dropdown
 | `value`  | `value`   | The value that will emitted when the custom-dropdown changes | `string` | `undefined` |
 
 
-## Events
-
-| Event          | Description                      | Type                                             |
-| -------------- | -------------------------------- | ------------------------------------------------ |
-| `selectOption` | Fired when clicking on an option | `CustomEvent<{ label: string; value: string; }>` |
-
-
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*
