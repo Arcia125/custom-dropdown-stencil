@@ -1,0 +1,19 @@
+<!doctype html><html dir="ltr" lang="en"><head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0"> <title>Stencil Component Starter</title> <link rel="modulepreload" href="/build/p-5db40762.js"><script type="module" data-stencil data-resources-url="/build/" data-stencil-namespace="custom-dropdown">import{p as t,H as e,b as o}from"/build/p-5db40762.js";export{s as setNonce}from"/build/p-5db40762.js";import{g as n}from"/build/p-e1255160.js";var c=()=>{{i(e.prototype)}const o=import.meta.url;const s={};if(o!==""){s.resourcesUrl=new URL(".",o).href}return t(s)};var i=t=>{const e=t.cloneNode;t.cloneNode=function(t){if(this.nodeName==="TEMPLATE"){return e.call(this,t)}const o=e.call(this,false);const s=this.childNodes;if(t){for(let t=0;t<s.length;t++){if(s[t].nodeType!==2){o.appendChild(s[t].cloneNode(true))}}}return o}};c().then((async t=>{await n();return o([["p-1331700f",[[1,"custom-dropdown",{label:[1],active:[32],selectedOption:[32],filter:[32]},[[0,"focus","handleFocus"],[0,"click","handleClick"],[4,"click","handleDocumentClick"],[0,"keydown","handleKeyDown"]]],[1,"custom-option",{value:[1]}]]]],t)}));
+//# sourceMappingURL=custom-dropdown.esm.js.map
+</script> <script nomodule="" src="/build/custom-dropdown.js" data-stencil></script> <style>:not(:defined) {
+        visibility: hidden;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --custom-dropdown-background-color: #2C2C2E;
+          --custom-option-background-color-hover: #3A3A3C;
+          --custom-option-background-color-focus: #48484A;
+          --custom-dropdown-font-color: #F5F5F7;
+        }
+        body {
+          background-color: #1C1C1E;
+        }
+      }</style> </head> <body> <custom-dropdown label="Color Options"> <custom-option value="white">White</custom-option> <custom-option value="white-titanium">White Titanium</custom-option> <custom-option value="black">Black</custom-option> <custom-option value="black-titanium">Black Titanium</custom-option> <custom-option value="teal">Teal</custom-option> <custom-option value="pink">Pink</custom-option> </custom-dropdown> <script>
+      const customDropdown = document.querySelector('custom-dropdown');
+      customDropdown.addEventListener('changeDropdown', console.log);
+    </script> </body></html>
