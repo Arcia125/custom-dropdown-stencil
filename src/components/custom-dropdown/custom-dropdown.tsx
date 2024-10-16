@@ -1,6 +1,5 @@
 import { Component, h, ComponentInterface, Host, Prop, State, Listen, Element, Event, EventEmitter } from '@stencil/core';
 import { debounce } from '../../utils/debounce';
-import { Option } from '../../utils/models';
 
 /**
  * Custom dropdown component with built in optional search. Should be used along with custom-option components simiarly
@@ -27,7 +26,7 @@ export class CustomDropdown implements ComponentInterface {
   /**
    * Value of the dropdown
    */
-  @State() selectedOption: Option = null;
+  @State() selectedOption: HTMLCustomOptionElement = null;
 
   /**
    * The value of the input
@@ -59,7 +58,7 @@ export class CustomDropdown implements ComponentInterface {
   handleClick(event: MouseEvent) {
     if (event.target instanceof customElements.get('custom-option')) {
       const option = event.target as HTMLCustomOptionElement;
-      this.selectedOption = { value: option.value, label: option.innerHTML };
+      this.selectedOption = option;
       this.updateOption();
       this.toggleDropdown();
     }
@@ -78,7 +77,7 @@ export class CustomDropdown implements ComponentInterface {
   private updateOption = () => {
     const options = this.getVisibleOptions();
     const optEl = options.find(o => document.activeElement === o);
-    this.selectedOption = optEl ? { value: optEl.value, label: optEl.innerHTML } : this.selectedOption;
+    this.selectedOption = optEl || this.selectedOption;
     this.changeDropdown.emit(this.selectedOption ? this.selectedOption.value : '');
   };
 
@@ -86,9 +85,8 @@ export class CustomDropdown implements ComponentInterface {
 
   getVisibleOptions = () => Array.from(this.el.querySelectorAll('custom-option.visible') as NodeListOf<HTMLCustomOptionElement>);
 
-  setOptionFocus = (option: Option | HTMLCustomOptionElement) => {
-    const optEl = 'label' in option ? this.getVisibleOptions().find(o => o.value === option.value) : option;
-    const li = optEl?.shadowRoot.querySelector('li');
+  setOptionFocus = (option: HTMLCustomOptionElement) => {
+    const li = option?.shadowRoot.querySelector('li');
     li?.focus();
   };
 
@@ -152,7 +150,7 @@ export class CustomDropdown implements ComponentInterface {
       case 'Escape':
         if (this.active) {
           this.changeActiveState(false);
-          this.updateFilter(this.selectedOption ? this.selectedOption.label : this.filter);
+          this.updateFilter(this.selectedOption?.innerHTML || this.filter);
         }
         break;
       case 'ArrowDown':
@@ -212,7 +210,7 @@ export class CustomDropdown implements ComponentInterface {
               tabindex="0"
               aria-expanded={this.active.toString()}
               onInput={this.handleInput}
-              value={this.selectedOption?.label || this.filter}
+              value={this.selectedOption?.innerHTML || this.filter}
             />
           </div>
           <ul class={`options${this.active ? ' active' : ''}`} role="listbox" id={`listbox-${this.label}`}>
