@@ -2,7 +2,7 @@
 
 # @arcia125/custom-dropdown
 
-![Custom Dropdown Example](readme/custom-dropdown-demo.gif)
+![Custom Dropdown Example](https://github.com/user-attachments/assets/30b74b93-2cb5-47b6-a6b9-27c4faa104d3)
 
 ## Single-Select Dropdown Component with Keyboard Navigation
 
