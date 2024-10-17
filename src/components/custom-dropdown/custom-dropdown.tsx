@@ -85,37 +85,39 @@ export class CustomDropdown implements ComponentInterface {
 
   getVisibleOptions = () => Array.from(this.el.querySelectorAll('custom-option.visible') as NodeListOf<HTMLCustomOptionElement>);
 
+  getActiveOption = () => {
+    const options = this.getVisibleOptions();
+    const index = options.findIndex(option => document.activeElement === option);
+    return {
+      index,
+      options,
+    };
+  };
+
+  focusNextOption = () => {
+    if (!this.active) this.changeActiveState(true);
+    this.setOptionFocus(this.getNextOrPrevOption('next'));
+  };
+
+  focusPrevOption = () => {
+    if (!this.active) this.changeActiveState(true);
+    this.setOptionFocus(this.getNextOrPrevOption('prev'));
+  };
+
+  getNextOrPrevOption = (dir: 'next' | 'prev') => {
+    const { index, options } = this.getActiveOption();
+    if (dir === 'next') return index === options.length - 1 ? options[0] : options[index + 1];
+    return index === 0 || index === -1 ? options[options.length - 1] : options[index - 1];
+  };
+
   setOptionFocus = (option: HTMLCustomOptionElement) => {
     const li = option?.shadowRoot.querySelector('li');
     li?.focus();
   };
 
-  focusSelectedOption = () => {
-    if (this.selectedOption) {
-      this.setOptionFocus(this.selectedOption);
-    } else {
-      this.focusNextOption();
-    }
-  };
-
-  focusNextOption = () => {
-    if (!this.active) {
-      this.changeActiveState(true);
-    }
-    const options = this.getVisibleOptions();
-    const index = options.findIndex(o => document.activeElement === o);
-    const option = index === options.length - 1 ? options[0] : options[index + 1];
-    this.setOptionFocus(option);
-  };
-
-  focusPrevOption = () => {
-    if (!this.active) {
-      this.changeActiveState(true);
-    }
-    const options = this.getVisibleOptions();
-    const index = options.findIndex(o => document.activeElement === o);
-    const option = index === 0 || index === -1 ? options[options.length - 1] : options[index - 1];
-    this.setOptionFocus(option);
+  private toggleDropdown = () => {
+    const active = !this.active;
+    this.changeActiveState(active);
   };
 
   private changeActiveState = (active: boolean) => {
@@ -126,11 +128,6 @@ export class CustomDropdown implements ComponentInterface {
       this.el.focus();
     }
     this.active = active;
-  };
-
-  private toggleDropdown = () => {
-    const active = !this.active;
-    this.changeActiveState(active);
   };
 
   @Listen('keydown')
@@ -164,6 +161,14 @@ export class CustomDropdown implements ComponentInterface {
     }
   }
 
+  focusSelectedOption = () => {
+    if (this.selectedOption) {
+      this.setOptionFocus(this.selectedOption);
+    } else {
+      this.focusNextOption();
+    }
+  };
+
   handleInput = (event: Event) => {
     const target = event.target as HTMLInputElement;
     const value = target.value;
@@ -179,8 +184,6 @@ export class CustomDropdown implements ComponentInterface {
     this.updateOptionVisibility(filter);
   }, this.filterDebounceMs);
 
-  optionIsVisible = (filter: string, option: HTMLCustomOptionElement) => filter === '' || option.innerHTML.toLowerCase().includes(filter.toLowerCase());
-
   updateOptionVisibility = (filter: string) => {
     const options = this.getAllOptions();
     options.forEach(option => {
@@ -191,6 +194,8 @@ export class CustomDropdown implements ComponentInterface {
       }
     });
   };
+
+  optionIsVisible = (filter: string, option: HTMLCustomOptionElement) => filter === '' || option.innerHTML.toLowerCase().includes(filter.toLowerCase());
 
   render() {
     return (
