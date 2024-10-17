@@ -61,7 +61,7 @@ export default App;
 ```html
   <html>
     <head>
-      <script src="https://cdn.jsdelivr.net/npm/@arcia125/custom-dropdown@0.2.0/dist/index.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@arcia125/custom-dropdown@0.5.0/dist/index.js"></script>
     </head>
     <custom-dropdown label="Color Options">
       <custom-option value="white">White</custom-option>
