@@ -164,13 +164,22 @@ export class CustomDropdown implements ComponentInterface {
     }
   }
 
+  handleInput = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    this.updateFilter(value);
+  };
+
   updateFilter = (value: string) => {
     this.filter = value;
     this.handleChangeFilterDebounced(this.filter);
   };
 
-  optionIsVisible = (filter: string, option: HTMLCustomOptionElement) =>
-    filter === '' || option.innerHTML.toLowerCase().includes(filter);
+  handleChangeFilterDebounced = debounce((filter: string) => {
+    this.updateOptionVisibility(filter);
+  }, this.filterDebounceMs);
+
+  optionIsVisible = (filter: string, option: HTMLCustomOptionElement) => filter === '' || option.innerHTML.toLowerCase().includes(filter.toLowerCase());
 
   updateOptionVisibility = (filter: string) => {
     const options = this.getAllOptions();
@@ -181,16 +190,6 @@ export class CustomDropdown implements ComponentInterface {
         option.classList.remove('visible');
       }
     });
-  };
-
-  handleChangeFilterDebounced = debounce((filter: string) => {
-    this.updateOptionVisibility(filter);
-  }, this.filterDebounceMs);
-
-  handleInput = (event: Event) => {
-    const target = event.target as HTMLInputElement;
-    const value = target.value;
-    this.updateFilter(value);
   };
 
   render() {
