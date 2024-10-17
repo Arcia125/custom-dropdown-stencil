@@ -34,21 +34,19 @@ import '@arcia/custom-dropdown';
 
 function App() {
   return (
-    <>
-      <div>
-        <custom-dropdown
-          label="Color Options"
-          onChangeDropdown={(event) => console.log(event.detail)}
-        >
-          <custom-option value="white">White</custom-option>
-          <custom-option value="white-titanium">White Titanium</custom-option>
-          <custom-option value="black">Black</custom-option>
-          <custom-option value="black-titanium">Black Titanium</custom-option>
-          <custom-option value="teal">Teal</custom-option>
-          <custom-option value="pink">Pink</custom-option>
-        </custom-dropdown>
-      </div>
-    </>
+    <div>
+      <custom-dropdown
+        label="Color Options"
+        onChangeDropdown={(event) => console.log(event.detail)}
+      >
+        <custom-option value="white">White</custom-option>
+        <custom-option value="white-titanium">White Titanium</custom-option>
+        <custom-option value="black">Black</custom-option>
+        <custom-option value="black-titanium">Black Titanium</custom-option>
+        <custom-option value="teal">Teal</custom-option>
+        <custom-option value="pink">Pink</custom-option>
+      </custom-dropdown>
+    </div>
   );
 }
 
@@ -59,35 +57,35 @@ export default App;
 ### HTML
 
 ```html
-  <html>
-    <head>
-      <script src="https://cdn.jsdelivr.net/npm/@arcia125/custom-dropdown@0.5.0/dist/index.js"></script>
-    </head>
-    <custom-dropdown label="Color Options">
-      <custom-option value="white">White</custom-option>
-      <custom-option value="white-titanium">White Titanium</custom-option>
-      <custom-option value="black">Black</custom-option>
-      <custom-option value="black-titanium">Black Titanium</custom-option>
-      <custom-option value="teal">Teal</custom-option>
-      <custom-option value="pink">Pink</custom-option>
-    </custom-dropdown>
-    <script>
-      const customDropdown = document.querySelector('custom-dropdown');
-      customDropdown.addEventListener('changeDropdown', console.log);
-    </script>
-  </html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@arcia125/custom-dropdown@0.5.0/dist/index.js"></script>
+  </head>
+  <custom-dropdown label="Color Options">
+    <custom-option value="white">White</custom-option>
+    <custom-option value="white-titanium">White Titanium</custom-option>
+    <custom-option value="black">Black</custom-option>
+    <custom-option value="black-titanium">Black Titanium</custom-option>
+    <custom-option value="teal">Teal</custom-option>
+    <custom-option value="pink">Pink</custom-option>
+  </custom-dropdown>
+  <script>
+    const customDropdown = document.querySelector('custom-dropdown');
+    customDropdown.addEventListener('changeDropdown', console.log);
+  </script>
+</html>
 ```
 
 ## Known Issues
 
 Flash of Unstyled Content (FOUC): Can be fixed by adding a style block in the HTML file to ensure styles load correctly before content is displayed.
 ```html
-    <style>
-      :not(:defined) {
-        visibility: hidden;
-      }
+<style>
+  :not(:defined) {
+    visibility: hidden;
+  }
 
-    </style>
+</style>
 ```
 
 
@@ -96,17 +94,17 @@ Flash of Unstyled Content (FOUC): Can be fixed by adding a style block in the HT
 Add these styles to your application to enable Dark mode.
 ```html
 <style>
-@media (prefers-color-scheme: dark) {
-  :root {
-    --custom-dropdown-background-color: #2C2C2E;
-    --custom-option-background-color-hover: #3A3A3C;
-    --custom-option-background-color-focus: #48484A;
-    --custom-dropdown-font-color: #F5F5F7;
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --custom-dropdown-background-color: #2C2C2E;
+      --custom-option-background-color-hover: #3A3A3C;
+      --custom-option-background-color-focus: #48484A;
+      --custom-dropdown-font-color: #F5F5F7;
+    }
+    body {
+      background-color: #1C1C1E;
+    }
   }
-  body {
-    background-color: #1C1C1E;
-  }
-}
 </style>
 ```
 
